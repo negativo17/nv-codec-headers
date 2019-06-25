@@ -1,6 +1,6 @@
 Name:           nv-codec-headers
-Version:        8.2.15.6
-Release:        1%{?dist}
+Version:        9.0.18.1
+Release:        2%{?dist}
 Summary:        FFmpeg version of Nvidia Codec SDK headers
 License:        MIT
 URL:            https://github.com/FFmpeg/nv-codec-headers
@@ -15,7 +15,7 @@ FFmpeg version of headers required to interface with Nvidias codec APIs.
 
 %prep
 %autosetup -n %{name}-n%{version}
-
+sed -i -e 's@/include@/include/ffnvcodec@g' ffnvcodec.pc.in
 
 %build
 %make_build PREFIX=%{_prefix} LIBDIR=/share
@@ -32,6 +32,21 @@ FFmpeg version of headers required to interface with Nvidias codec APIs.
 
 
 %changelog
+* Tue May 21 2019 Leigh Scott <leigh123linux@googlemail.com> - 9.0.18.1-2
+- Use correct path for pkg-config file
+
+* Sat May 11 2019 Leigh Scott <leigh123linux@googlemail.com> - 9.0.18.1-1
+- Update to 9.0.18.1
+
+* Fri Mar 01 2019 Leigh Scott <leigh123linux@googlemail.com> - 9.0.18.0-1
+- Update to 9.0.18.0
+
+* Sun Feb 03 2019 Leigh Scott <leigh123linux@googlemail.com> - 8.2.15.7-1
+- Update to 8.2.15.7
+
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 8.2.15.6-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Sat Jan 05 2019 Leigh Scott <leigh123linux@googlemail.com> - 8.2.15.6-1
 - Update to 8.2.15.6
 
