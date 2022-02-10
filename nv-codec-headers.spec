@@ -1,5 +1,5 @@
 Name:           nv-codec-headers
-Version:        11.0.10.0
+Version:        11.1.5.1
 Release:        1%{?dist}
 Summary:        FFmpeg version of Nvidia Codec SDK headers
 License:        MIT
@@ -8,6 +8,7 @@ Source0:        %url/archive/n%{version}/%{name}-n%{version}.tar.gz
 
 BuildArch:      noarch
        
+BuildRequires:  make
 
 %description
 FFmpeg version of headers required to interface with Nvidias codec APIs.
@@ -16,6 +17,10 @@ FFmpeg version of headers required to interface with Nvidias codec APIs.
 %prep
 %autosetup -n %{name}-n%{version}
 sed -i -e 's@/include@/include/ffnvcodec@g' ffnvcodec.pc.in
+
+# Extract license
+sed -n '4,25p' include/ffnvcodec/nvEncodeAPI.h > LICENSE
+sed -i '1,22s/^.\{,3\}//' LICENSE
 
 %build
 %make_build PREFIX=%{_prefix} LIBDIR=/share
@@ -27,11 +32,27 @@ sed -i -e 's@/include@/include/ffnvcodec@g' ffnvcodec.pc.in
 
 %files
 %doc README
+%license LICENSE
 %{_includedir}/ffnvcodec/
 %{_datadir}/pkgconfig/ffnvcodec.pc
 
 
 %changelog
+* Wed Jan 12 2022 Leigh Scott <leigh123linux@gmail.com> - 11.1.5.1-1
+- Update to 11.1.5.1
+
+* Wed Dec 08 2021 Leigh Scott <leigh123linux@gmail.com> - 11.1.5.0-1
+- Update to 11.1.5.0
+
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 11.0.10.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Wed Apr 21 2021 Leigh Scott <leigh123linux@gmail.com> - 11.0.10.1-1
+- Update to 11.0.10.1
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 11.0.10.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Thu Oct 15 2020 Leigh Scott <leigh123linux@gmail.com> - 11.0.10.0-1
 - Update to 11.0.10.0
 
