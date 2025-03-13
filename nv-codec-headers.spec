@@ -1,5 +1,5 @@
 Name:           nv-codec-headers
-Version:        12.2.72.0
+Version:        13.0.19.0
 Release:        1%{?dist}
 Summary:        FFmpeg version of Nvidia Codec SDK headers
 License:        MIT
@@ -34,6 +34,9 @@ sed -i '1,22s/^.\{,3\}//' LICENSE
 %{_datadir}/pkgconfig/ffnvcodec.pc
 
 %changelog
+* Thu Mar 13 2025 Simone Caronni <negativo17@gmail.com> - 13.0.19.0-1
+- Update to 13.0.19.0.
+
 * Thu Sep 26 2024 Simone Caronni <negativo17@gmail.com> - 12.2.72.0-1
 - Update to 12.2.72.0.
 - Trim changelog.
